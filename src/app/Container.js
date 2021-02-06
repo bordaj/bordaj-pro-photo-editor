@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import BasicControls from '../components/BasicControls'
+import Fundamentals from '../Containers/Fundamentals'
 const Home = () => {
 
    const [imgsrc, setImgsrc] = useState(null);
@@ -63,7 +63,6 @@ const Home = () => {
       }
    }
    useEffect(() => {
-
       renderImage()
    }, [imgsrc]);
 
@@ -77,7 +76,7 @@ const Home = () => {
                   accept="image/*"
                   onChange={onSelectedFile}
                   id="initial"
-                  
+
                />
             </div>
             <canvas
@@ -88,7 +87,8 @@ const Home = () => {
                style={{ border: '1px solid black' }}
             />
          </div>
-         <BasicControls  ctx={ctx} setContext={setContext} canvas={canvas} image={image}  />
+         <Fundamentals ctx={ctx} setContext={setContext} canvas={canvas} image={image} />
+
       </>
    );
 }
