@@ -11,15 +11,15 @@ const Fundamentals = (props) => {
    const stateHelper = (code, val) => {
 
       if (code === codes.BRIGHTNESS) {
-         setBrightness(parseInt(val))
+         setBrightness(val)
       } else if (code === codes.CONTRAST) {
-         setContrast(parseInt(val))
+         setContrast(val)
       } else if (code === codes.VIBRANCE) {
-         setVibrance(parseInt(val))
+         setVibrance(val)
       } else if (code === codes.SEPIA) {
-         setSepia(parseInt(val))
-      } else {
-         setHue(parseInt(val))
+         setSepia(val)
+      } else if (code === codes.HUE) {
+         setHue(val)
       }
 
    }
@@ -34,7 +34,7 @@ const Fundamentals = (props) => {
    }
    useEffect(() => {
       console.log(brightness, contrast, hue, sepia, vibrance, 'here')
-   }, [brightness, contrast])
+   }, [brightness, contrast, hue, sepia, vibrance])
 
    return (
       <>
@@ -48,15 +48,15 @@ const Fundamentals = (props) => {
          </div>
          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <label for="hue">Hue  <span>{hue}</span></label>
-            <input onChange={e => applyFundamentals('asd', e)} id="hue" name="hue" type="range" min="0" max="150" value={hue} step={5} />
+            <input onChange={e => applyFundamentals(codes.HUE, e)} id="hue" name="hue" type="range" min="0" max="150" value={hue} step={5} />
          </div>
          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <label for="vibrance">vibrance  <span>{vibrance}</span></label>
-            <input onChange={e => applyFundamentals(codes.VIBRANCE, e)} id="vibrance" name="vibrance" type="range" min="-20" max="20" value={vibrance} />
+            <input onChange={e => applyFundamentals(codes.VIBRANCE, e)} id="vibrance" name="vibrance" type="range" min="0" max="300" value={vibrance} />
          </div>
          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <label for="sepia">sepia  <span>{sepia}</span></label>
-            <input onChange={e => applyFundamentals(codes.SEPIA, e)} id="sepia" name="sepia" type="range" min="-20" max="20" value={sepia} />
+            <input onChange={e => applyFundamentals(codes.SEPIA, e)} id="sepia" name="sepia" type="range" min="-100" max="100" value={sepia} />
          </div>
       </>
    );
