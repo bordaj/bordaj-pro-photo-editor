@@ -25,11 +25,11 @@ const Fundamentals = (props) => {
    }
 
    const applyFundamentals = (code, e) => {
-      const value = e.target.value || 0
+      const value = parseInt(e.target.value) || 0
       stateHelper(code, value)
       return window.Caman('#canvas', image, function () {
          this.revert(false);
-         this.brightness(brightness).hue(hue).contrast(contrast).vibrance(vibrance).sepia(sepia).render();
+         this.brightness(code == codes.BRIGHTNESS ? value : brightness).hue(code == codes.HUE ? value : hue).contrast(code == codes.CONTRAST ? value : contrast).vibrance(code == codes.VIBRANCE ? value : vibrance).sepia(code == codes.SEPIA ? value : sepia).render();
       });
    }
    useEffect(() => {
@@ -58,7 +58,6 @@ const Fundamentals = (props) => {
             <label for="sepia">sepia  <span>{sepia}</span></label>
             <input onChange={e => applyFundamentals(codes.SEPIA, e)} id="sepia" name="sepia" type="range" min="-20" max="20" value={sepia} />
          </div>
-         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={e => applyFundamentals(e)}>Apply Vintage</div>
       </>
    );
 }
