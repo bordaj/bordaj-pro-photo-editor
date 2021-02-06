@@ -24,8 +24,9 @@ const Fundamentals = (props) => {
 
    }
 
-   const applyFundamentals = (code, e) => {
-      const value = parseInt(e.target.value) || 0
+   const applyFundamentals = (code, e, reset) => {
+      const valu = parseInt(e.target.value) || 0
+      const value = reset ? 0 : valu
       stateHelper(code, value)
       return window.Caman('#canvas', image, function () {
          this.revert(false);
@@ -39,7 +40,7 @@ const Fundamentals = (props) => {
    return (
       <>
          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <label for="brightness">Brightness  <span>{brightness}</span></label>
+            <label for="brightness"><div onAuxClick={(e) => applyFundamentals(codes.BRIGHTNESS, e, true)}>Brightness <span>{brightness}</span></div></label>
             <input onChange={e => applyFundamentals(codes.BRIGHTNESS, e)} id="brightness" name="brightness" type="range" min="-100" max="100" value={brightness} />
          </div>
          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
