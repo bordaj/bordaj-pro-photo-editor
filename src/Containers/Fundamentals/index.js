@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as codes from "../../helpers/codes";
-import { Wrapper } from "./styles";
+import { Content } from "../AppWrapper";
+import { SliderWrapper } from "./styles";
 const Fundamentals = (props) => {
   const { ctx, setContext, canvas, image } = props;
   const [brightness, setBrightness] = useState(0);
@@ -42,8 +43,8 @@ const Fundamentals = (props) => {
   }, [brightness, contrast, hue, sepia, vibrance]);
 
   return (
-    <>
-      <Wrapper>
+    <Content>
+      <SliderWrapper>
         <label for="brightness">
           <div onAuxClick={(e) => applyFundamentals(codes.BRIGHTNESS, e, true)}>
             Brightness <span>{brightness}</span>
@@ -58,14 +59,8 @@ const Fundamentals = (props) => {
           max="100"
           value={brightness}
         />
-      </Wrapper>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      </SliderWrapper>
+      <SliderWrapper>
         <label for="contrast">
           Contrast <span>{contrast}</span>
         </label>
@@ -78,14 +73,8 @@ const Fundamentals = (props) => {
           max="20"
           value={contrast}
         />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      </SliderWrapper>
+      <SliderWrapper>
         <label for="hue">
           Hue <span>{hue}</span>
         </label>
@@ -99,14 +88,8 @@ const Fundamentals = (props) => {
           value={hue}
           step={5}
         />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      </SliderWrapper>
+      <SliderWrapper>
         <label for="vibrance">
           vibrance <span>{vibrance}</span>
         </label>
@@ -119,14 +102,8 @@ const Fundamentals = (props) => {
           max="300"
           value={vibrance}
         />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      </SliderWrapper>
+      <SliderWrapper>
         <label for="sepia">
           sepia <span>{sepia}</span>
         </label>
@@ -139,8 +116,8 @@ const Fundamentals = (props) => {
           max="100"
           value={sepia}
         />
-      </div>
-    </>
+      </SliderWrapper>
+    </Content>
   );
 };
 export default Fundamentals;
