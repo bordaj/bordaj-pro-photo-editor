@@ -9,7 +9,6 @@ const Home = () => {
   const canvasRef = useRef(null);
   const originalCanvasRef = useRef(null);
   const [ctx, setCtx] = useState();
-
   const canvas = canvasRef.current;
   const originalCanvas = originalCanvasRef.current;
   const image = new Image();
@@ -79,6 +78,7 @@ const Home = () => {
   const renderImage = () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+
     const img = new Image();
     img.crossOrigin = "";
     img.src = imgsrc;
@@ -86,6 +86,13 @@ const Home = () => {
     img.onload = function () {
       canvas.width = img.width;
       canvas.height = img.height;
+      originalCanvas.width = img.width;
+      originalCanvas.height = img.height;
+      let yolo = originalCanvas
+        ? originalCanvas
+            .getContext("2d")
+            .drawImage(img, 0, 0, img.width, img.height)
+        : 0;
       ctx.drawImage(img, 0, 0, img.width, img.height);
     };
   };
@@ -110,8 +117,6 @@ const Home = () => {
             <canvas
               id="original-canvas"
               ref={originalCanvasRef}
-              width={600}
-              height={400}
               style={{ border: "1px solid black" }}
             />
           </div>

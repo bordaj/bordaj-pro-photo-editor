@@ -5,6 +5,7 @@ export const Header = styled.div`
   background: ${(props) => props.theme.colors.background};
   position: sticky;
   top: 0;
+  z-index: 99;
 `;
 export const Footer = styled.div`
   height: 64px;
