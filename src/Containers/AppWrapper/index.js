@@ -15,6 +15,29 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0px 20%;
+  [type="file"] {
+    display: none;
+  }
+
+  [type="file"] + label {
+    background: ${(props) => props.theme.colors.buttonBackground};
+    color: ${(props) => props.theme.colors.buttonColor};
+    display: block;
+    margin-top: 24px;
+    max-width: 100%;
+    line-height: 36px;
+    padding: 0 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    position: relative;
+    left: 0px;
+  }
+
+  [type="file"] + label:hover {
+    background: ${(props) => props.theme.colors.buttonColor};
+    color: ${(props) => props.theme.colors.buttonBackground};
+    border: ${(props) => props.theme.colors.buttonBorder};
+  }
 `;
 export const Content = styled(ContentWrapper)`
   flex-direction: row;
@@ -42,4 +65,3 @@ export const Tab = styled.button`
   background-color: ${(props) => (props.active ? "white" : "lightgray")};
   height: ${(props) => (props.active ? "3em" : "2.6em; top:.4em")};
 `;
-

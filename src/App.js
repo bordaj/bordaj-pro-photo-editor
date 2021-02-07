@@ -3,10 +3,10 @@ import { ThemeProvider } from "styled-components";
 import darkTheme from "./themes/darkMode";
 import lightTheme from "./themes/lightMode";
 import Home from "./app/Container";
-import Button from "./components/Button";
+import {Button} from "./components/Button";
 import { AppWrapper } from "./Containers/AppWrapper";
 import "./App.css";
-import { Footer, Header } from "./components/Button/Header";
+import { Footer, Header } from "./components/Header";
 export default function App() {
   const stored = localStorage.getItem("isDarkMode");
   const [isDarkMode, setIsDarkMode] = useState(

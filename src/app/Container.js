@@ -2,12 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import Fundamentals from "../Containers/Fundamentals";
 import Advanced from "../Containers/Advanced";
 
-import {
-  CanvasWrapper,
-  Tabs,
-  Tab,
-  ContentWrapper,
-} from "../Containers/AppWrapper";
+import { CanvasWrapper, ContentWrapper } from "../Containers/AppWrapper";
+import { Button, DownloadButton } from "../components/Button";
 const Home = () => {
   const [imgsrc, setImgsrc] = useState(null);
   const canvasRef = useRef(null);
@@ -97,23 +93,26 @@ const Home = () => {
     renderImage();
   }, [imgsrc]);
   let active = 0;
-  const handleClick = (e) => {
-    const index = parseInt(e.target.id, 0);
-    if (index !== active) {
-      active = index;
-    }
+  const handleSave = (e) => {
+    const png = canvas.toDataURL();
+    e.target.href = png;
   };
   return (
     <>
-      <div style={{ margin: "auto", width: "max-content" }}>
-        <CanvasWrapper>
-          <div>
+      <div
+        style={{ margin: "0px 20%", display: "flex", justifyContent: "center" }}
+      >
+        <CanvasWrapper style={{ position: "relative" }}>
+          <div
+            id="hide"
+            style={{ display: "none", position: "absolute", top: 0 }}
+          >
             <canvas
               id="original-canvas"
               ref={originalCanvasRef}
               width={600}
               height={400}
-              style={{ border: "1px solid black", display: "none" }}
+              style={{ border: "1px solid black" }}
             />
           </div>
           <div>
@@ -126,34 +125,33 @@ const Home = () => {
             />
           </div>
         </CanvasWrapper>
-        <div
+      </div>
+      <ContentWrapper style={{ flexDirection: "row" }}>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onSelectedFile}
+          id="upload-file"
+        />
+        <label for="upload-file">Upload a Picture</label>
+        <Button
           onMouseLeave={(e) => {
-            document.getElementById("original-canvas").style.display = "none";
+            document.getElementById("hide").style.display = "none";
           }}
           onMouseEnter={(e) => {
-            document.getElementById("original-canvas").style.display = "block";
-          }}
-          style={{
-            width: 300,
-            height: 40,
-            border: "1px solid black",
-            color: "black",
-            textAlign: "center",
+            document.getElementById("hide").style.display = "block";
           }}
         >
           Show Original
-        </div>
-        <div style={{ padding: 24 }}>
-          <input
-            className="custom-file-input"
-            type="file"
-            accept="image/*"
-            onChange={onSelectedFile}
-            id="initial"
-          />
-        </div>
-      </div>
-
+        </Button>
+        <DownloadButton
+          onClick={(e) => handleSave(e)}
+          download="edited"
+          href="#1"
+        >
+          Download Image
+        </DownloadButton>
+      </ContentWrapper>
       <ContentWrapper>
         <Fundamentals
           ctx={ctx}
