@@ -60,6 +60,12 @@ const Home = () => {
   }
 
   const onSelectedFile = (e) => {
+    const container = document.getElementById("hideOriginal");
+    const oldcanv = document.getElementById("canvas");
+    container.removeChild(oldcanv);
+    const canvas = document.createElement("canvas");
+    canvas.id = "canvas";
+    container.appendChild(canvas);
     e.preventDefault();
     let files;
     if (e.dataTransfer) {
@@ -72,7 +78,6 @@ const Home = () => {
       setImgsrc(reader.result);
     };
     reader.readAsDataURL(files[0]);
-    renderImage();
   };
   const renderImage = () => {
     const canvas = document.getElementById("canvas");
@@ -105,19 +110,79 @@ const Home = () => {
   };
   const handleCrop = () => {
     setCrop(!crop);
+    document.getElementById("canvas").style.display = "none";
   };
-
-  useEffect(() => {
-    if (crop) {
-      document.getElementById("hideOriginal").style.display = "none";
-      document.getElementById("hide").style.display = "block";
-    } else {
-      document.getElementById("hideOriginal").style.display = "block";
-    }
-  }, [crop]);
-  const saveCropped = () => {};
+  const obj = imgsrc ? { display: "none" } : null;
   return (
     <>
+      {/* <div style={{ minWidth: "40%", margin: "0 40px" }}>
+        <CanvasWrapper style={{ position: "relative" }}>
+          <div
+            id="hide"
+            style={{ display: "none", position: "absolute", top: 0 }}
+          >
+            <canvas id="original-canvas" ref={originalCanvasRef} />
+          </div>
+          <div id="hideOriginal">
+            <canvas id="canvas" ref={canvasRef} width={0} height={0} />
+          </div>
+          {!crop && image ? null : (
+            <Crop image={image} canvas={canvas} setCrop={setCrop} />
+          )}
+        </CanvasWrapper>
+
+        <ContentWrapper style={{ flexDirection: "row" }}>
+          {!crop ? (
+            <>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={onSelectedFile}
+                id="upload-file"
+              />
+              <label for="upload-file">Upload a Picture</label>
+            </>
+          ) : null}
+          {imgsrc ? (
+            !crop ? (
+              <>
+                <Button
+                  onMouseLeave={(e) => {
+                    document.getElementById("hide").style.display = "none";
+                  }}
+                  onMouseEnter={(e) => {
+                    document.getElementById("hide").style.display = "block";
+                  }}
+                >
+                  Show Original
+                </Button>
+                <DownloadButton
+                  onClick={(e) => handleSave(e)}
+                  download="edited"
+                  href="#1"
+                >
+                  Download Image
+                </DownloadButton>
+                <Button onClick={() => handleCrop()}>Crop</Button>
+              </>
+            ) : null
+          ) : null}
+        </ContentWrapper>
+      </div>
+      <div style={{ minWidth: "40%", margin: "0 40px" }}>
+        <Fundamentals
+          ctx={ctx}
+          setContext={setContext}
+          canvas={canvas}
+          image={image}
+        />
+        <Advanced
+          ctx={ctx}
+          setContext={setContext}
+          canvas={canvas}
+          image={image}
+        />
+      </div> */}
       <div
         style={{ margin: "0px 20%", display: "flex", justifyContent: "center" }}
       >
@@ -126,20 +191,10 @@ const Home = () => {
             id="hide"
             style={{ display: "none", position: "absolute", top: 0 }}
           >
-            <canvas
-              id="original-canvas"
-              ref={originalCanvasRef}
-              style={{ border: "1px solid black" }}
-            />
+            <canvas id="original-canvas" ref={originalCanvasRef} />
           </div>
           <div id="hideOriginal">
-            <canvas
-              id="canvas"
-              ref={canvasRef}
-              width={600}
-              height={400}
-              style={{ border: "1px solid black" }}
-            />
+            <canvas id="canvas" ref={canvasRef} width={0} height={0} />
           </div>
           {!crop && image ? null : (
             <Crop image={image} canvas={canvas} setCrop={setCrop} />
@@ -147,33 +202,39 @@ const Home = () => {
         </CanvasWrapper>
       </div>
       <ContentWrapper style={{ flexDirection: "row" }}>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={onSelectedFile}
-          id="upload-file"
-        />
-        <label for="upload-file">Upload a Picture</label>
-        <Button
-          onMouseLeave={(e) => {
-            document.getElementById("hide").style.display = "none";
-          }}
-          onMouseEnter={(e) => {
-            document.getElementById("hide").style.display = "block";
-          }}
-        >
-          Show Original
-        </Button>
-        <DownloadButton
-          onClick={(e) => handleSave(e)}
-          download="edited"
-          href="#1"
-        >
-          Download Image
-        </DownloadButton>
+        {!crop ? (
+          <>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={onSelectedFile}
+              id="upload-file"
+            />
+            <label for="upload-file">Upload a Picture</label>
+          </>
+        ) : null}
         {imgsrc ? (
           !crop ? (
-            <Button onClick={() => handleCrop()}>Crop</Button>
+            <>
+              <Button
+                onMouseLeave={(e) => {
+                  document.getElementById("hide").style.display = "none";
+                }}
+                onMouseEnter={(e) => {
+                  document.getElementById("hide").style.display = "block";
+                }}
+              >
+                Show Original
+              </Button>
+              <DownloadButton
+                onClick={(e) => handleSave(e)}
+                download="edited"
+                href="#1"
+              >
+                Download Image
+              </DownloadButton>
+              <Button onClick={() => handleCrop()}>Crop</Button>
+            </>
           ) : null
         ) : null}
       </ContentWrapper>
