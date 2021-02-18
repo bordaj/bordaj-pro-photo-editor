@@ -2,8 +2,7 @@ import React from "react";
 import { Button } from "../../components/Button";
 import { Content } from "../AppWrapper";
 const Advanced = (props) => {
-  const { image } = props;
-
+  const { image, allowStack } = props;
   const filterList = [
     { vintage: "vintage" },
     { lomo: "lomo" },
@@ -41,6 +40,7 @@ const Advanced = (props) => {
   ];
   const applyAdvanced = (element) => {
     return window.Caman("#canvas", image, function () {
+      const co = allowStack ? null : this.revert();
       this[element]().render();
     });
   };
@@ -51,17 +51,6 @@ const Advanced = (props) => {
         return (
           <Button
             onClick={() => applyAdvanced(element[Object.keys(element)[0]])}
-          >
-            {Object.keys(element)[0]}
-          </Button>
-        );
-      })}
-      {customFilterList.map((element, i) => {
-        return (
-          <Button
-            onClick={() => {
-              element.button();
-            }}
           >
             {Object.keys(element)[0]}
           </Button>

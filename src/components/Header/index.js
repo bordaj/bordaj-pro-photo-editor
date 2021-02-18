@@ -14,10 +14,10 @@ export const Footer = styled.div`
 `;
 
 export const HeaderTitle = styled.div`
-  margin: 14px;
-  color: ${props => props.theme.colors.textColor};
+  margin: auto 10px auto 10px;
+  color: ${(props) => props.theme.colors.textColor};
   font-weight: bold;
-  font-size:24px;
+  font-size: large;
 `;
 export const SwitchContainer = styled.div`
   margin: 20px;

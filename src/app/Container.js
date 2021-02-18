@@ -4,6 +4,8 @@ import Advanced from "../Containers/Advanced";
 import Crop from "../Containers/Crop";
 import { CanvasWrapper, ContentWrapper } from "../Containers/AppWrapper";
 import { Button, DownloadButton } from "../components/Button";
+import { HeaderTitle } from "../components/Header";
+import Custom from "../Containers/Custom";
 const Home = () => {
   const [imgsrc, setImgsrc] = useState(null);
   const canvasRef = useRef(null);
@@ -15,6 +17,8 @@ const Home = () => {
   image.crossOrigin = "Anonymous";
   image.src = imgsrc;
   const [crop, setCrop] = useState(false);
+  const [allowStack, setAllowStack] = useState(false);
+  const [reset, setReset] = useState(false);
   // console.log("image", imgsrc);
   // console.log("imgsrc", image.src.split("/")[image.src.split("/").length]);
   const setContext = (newCtx) => {
@@ -115,74 +119,6 @@ const Home = () => {
   const obj = imgsrc ? { display: "none" } : null;
   return (
     <>
-      {/* <div style={{ minWidth: "40%", margin: "0 40px" }}>
-        <CanvasWrapper style={{ position: "relative" }}>
-          <div
-            id="hide"
-            style={{ display: "none", position: "absolute", top: 0 }}
-          >
-            <canvas id="original-canvas" ref={originalCanvasRef} />
-          </div>
-          <div id="hideOriginal">
-            <canvas id="canvas" ref={canvasRef} width={0} height={0} />
-          </div>
-          {!crop && image ? null : (
-            <Crop image={image} canvas={canvas} setCrop={setCrop} />
-          )}
-        </CanvasWrapper>
-
-        <ContentWrapper style={{ flexDirection: "row" }}>
-          {!crop ? (
-            <>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={onSelectedFile}
-                id="upload-file"
-              />
-              <label for="upload-file">Upload a Picture</label>
-            </>
-          ) : null}
-          {imgsrc ? (
-            !crop ? (
-              <>
-                <Button
-                  onMouseLeave={(e) => {
-                    document.getElementById("hide").style.display = "none";
-                  }}
-                  onMouseEnter={(e) => {
-                    document.getElementById("hide").style.display = "block";
-                  }}
-                >
-                  Show Original
-                </Button>
-                <DownloadButton
-                  onClick={(e) => handleSave(e)}
-                  download="edited"
-                  href="#1"
-                >
-                  Download Image
-                </DownloadButton>
-                <Button onClick={() => handleCrop()}>Crop</Button>
-              </>
-            ) : null
-          ) : null}
-        </ContentWrapper>
-      </div>
-      <div style={{ minWidth: "40%", margin: "0 40px" }}>
-        <Fundamentals
-          ctx={ctx}
-          setContext={setContext}
-          canvas={canvas}
-          image={image}
-        />
-        <Advanced
-          ctx={ctx}
-          setContext={setContext}
-          canvas={canvas}
-          image={image}
-        />
-      </div> */}
       <div
         style={{ margin: "0px 20%", display: "flex", justifyContent: "center" }}
       >
@@ -238,20 +174,52 @@ const Home = () => {
           ) : null
         ) : null}
       </ContentWrapper>
-      <ContentWrapper>
-        <Fundamentals
-          ctx={ctx}
-          setContext={setContext}
-          canvas={canvas}
-          image={image}
-        />
-        <Advanced
-          ctx={ctx}
-          setContext={setContext}
-          canvas={canvas}
-          image={image}
-        />
-      </ContentWrapper>
+      {imgsrc ? (
+        <ContentWrapper>
+          <HeaderTitle style={{ paddingTop: 16 }}>
+            Fundamentals{" "}
+            <span style={{ fontSize: "small", fontWeight: "normal" }}>
+              Use MMB to reset single property.{" "}
+              <span
+                onClick={() => setReset(true)}
+                style={{ textDecorationLine: "underline", cursor: "pointer" }}
+              >
+                Reset All
+              </span>
+            </span>
+          </HeaderTitle>
+
+          <Fundamentals
+            ctx={ctx}
+            setContext={setContext}
+            canvas={canvas}
+            image={image}
+            reset={reset}
+            setReset={setReset}
+          />
+          <HeaderTitle style={{ paddingTop: 16 }}>
+            Advanced{" "}
+            <span style={{ fontSize: "small", fontWeight: "normal" }}>
+              I want my filters to{" "}
+              <span
+                onClick={() => setAllowStack(!allowStack)}
+                style={{ textDecorationLine: "underline", cursor: "pointer" }}
+              >
+                {allowStack ? "stack." : "not stack."}
+              </span>
+            </span>
+          </HeaderTitle>
+          <Advanced
+            ctx={ctx}
+            setContext={setContext}
+            canvas={canvas}
+            image={image}
+            allowStack={allowStack}
+          />
+          <HeaderTitle style={{ paddingTop: 16 }}>Custom</HeaderTitle>
+          <Custom image={image} />
+        </ContentWrapper>
+      ) : null}
     </>
   );
 };

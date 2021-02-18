@@ -3,7 +3,7 @@ import * as codes from "../../helpers/codes";
 import { Content } from "../AppWrapper";
 import { SliderWrapper } from "./styles";
 const Fundamentals = (props) => {
-  const { ctx, setContext, canvas, image } = props;
+  const { image, reset, setReset } = props;
   const [brightness, setBrightness] = useState(0);
   const [contrast, setContrast] = useState(0);
   const [hue, setHue] = useState(0);
@@ -29,7 +29,7 @@ const Fundamentals = (props) => {
     const value = reset ? 0 : valu;
     stateHelper(code, value);
     return window.Caman("#canvas", image, function () {
-      this.revert(false);
+      this.revert();
       this.brightness(code == codes.BRIGHTNESS ? value : brightness)
         .hue(code == codes.HUE ? value : hue)
         .contrast(code == codes.CONTRAST ? value : contrast)
@@ -39,8 +39,20 @@ const Fundamentals = (props) => {
     });
   };
   useEffect(() => {
-    console.log(brightness, contrast, hue, sepia, vibrance, "here");
-  }, [brightness, contrast, hue, sepia, vibrance]);
+    if (reset) {
+      return window.Caman("#canvas", image, function () {
+        this.revert();
+
+        this.render();
+        setBrightness(0);
+        setContrast(0);
+        setVibrance(0);
+        setSepia(0);
+        setHue(0);
+        setReset(!reset);
+      });
+    }
+  }, [brightness, contrast, hue, sepia, vibrance, reset]);
 
   return (
     <Content>
@@ -62,7 +74,9 @@ const Fundamentals = (props) => {
       </SliderWrapper>
       <SliderWrapper>
         <label for="contrast">
-          Contrast <span>{contrast}</span>
+          <div onAuxClick={(e) => applyFundamentals(codes.CONTRAST, e, true)}>
+            Contrast <span>{contrast}</span>
+          </div>
         </label>
         <input
           onChange={(e) => applyFundamentals(codes.CONTRAST, e)}
@@ -76,7 +90,9 @@ const Fundamentals = (props) => {
       </SliderWrapper>
       <SliderWrapper>
         <label for="hue">
-          Hue <span>{hue}</span>
+          <div onAuxClick={(e) => applyFundamentals(codes.HUE, e, true)}>
+            Hue <span>{hue}</span>
+          </div>
         </label>
         <input
           onChange={(e) => applyFundamentals(codes.HUE, e)}
@@ -91,7 +107,9 @@ const Fundamentals = (props) => {
       </SliderWrapper>
       <SliderWrapper>
         <label for="vibrance">
-          vibrance <span>{vibrance}</span>
+          <div onAuxClick={(e) => applyFundamentals(codes.VIBRANCE, e, true)}>
+            vibrance <span>{vibrance}</span>
+          </div>
         </label>
         <input
           onChange={(e) => applyFundamentals(codes.VIBRANCE, e)}
@@ -105,7 +123,9 @@ const Fundamentals = (props) => {
       </SliderWrapper>
       <SliderWrapper>
         <label for="sepia">
-          sepia <span>{sepia}</span>
+          <div onAuxClick={(e) => applyFundamentals(codes.SEPIA, e, true)}>
+            sepia <span>{sepia}</span>
+          </div>
         </label>
         <input
           onChange={(e) => applyFundamentals(codes.SEPIA, e)}

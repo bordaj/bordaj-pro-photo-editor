@@ -12,6 +12,7 @@ export const Button = styled.button`
   border-radius: 4px;
   font-size: 14px;
   :hover {
+    cursor: pointer;
     background: ${(props) => props.theme.colors.buttonColor};
     color: ${(props) => props.theme.colors.buttonBackground};
     border: ${(props) => props.theme.colors.buttonBorder};
@@ -30,6 +31,7 @@ export const DownloadButton = styled.a`
   font-size: 14px;
   text-decoration: none;
   :hover {
+    cursor: pointer;
     background: ${(props) => props.theme.colors.buttonColor};
     color: ${(props) => props.theme.colors.buttonBackground};
     border: ${(props) => props.theme.colors.buttonBorder};

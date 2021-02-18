@@ -4,7 +4,6 @@ export const AppWrapper = styled.div`
   flex: 1;
   background: ${(props) => props.theme.colors.cardBackground};
   color: ${(props) => props.theme.colors.textColor};
-  padding-top: 32px;
   max-height: calc(100vh - 128px);
   overflow-y: auto;
   /* @media (max-width: 786px) {
@@ -40,6 +39,7 @@ export const ContentWrapper = styled.div`
   }
 
   [type="file"] + label:hover {
+    cursor: pointer;
     background: ${(props) => props.theme.colors.buttonColor};
     color: ${(props) => props.theme.colors.buttonBackground};
     border: ${(props) => props.theme.colors.buttonBorder};
