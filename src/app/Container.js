@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Fundamentals from "../Containers/Fundamentals";
 import Advanced from "../Containers/Advanced";
-
+import Crop from "../Containers/Crop";
 import { CanvasWrapper, ContentWrapper } from "../Containers/AppWrapper";
 import { Button, DownloadButton } from "../components/Button";
 const Home = () => {
@@ -14,6 +14,7 @@ const Home = () => {
   const image = new Image();
   image.crossOrigin = "Anonymous";
   image.src = imgsrc;
+  const [crop, setCrop] = useState(false);
   // console.log("image", imgsrc);
   // console.log("imgsrc", image.src.split("/")[image.src.split("/").length]);
   const setContext = (newCtx) => {
@@ -57,9 +58,6 @@ const Home = () => {
       }
     }
   }
-  if (imgsrc !== null) {
-    drawImage("initial");
-  }
 
   const onSelectedFile = (e) => {
     e.preventDefault();
@@ -74,6 +72,7 @@ const Home = () => {
       setImgsrc(reader.result);
     };
     reader.readAsDataURL(files[0]);
+    renderImage();
   };
   const renderImage = () => {
     const canvas = document.getElementById("canvas");
@@ -104,6 +103,19 @@ const Home = () => {
     const png = canvas.toDataURL();
     e.target.href = png;
   };
+  const handleCrop = () => {
+    setCrop(!crop);
+  };
+
+  useEffect(() => {
+    if (crop) {
+      document.getElementById("hideOriginal").style.display = "none";
+      document.getElementById("hide").style.display = "block";
+    } else {
+      document.getElementById("hideOriginal").style.display = "block";
+    }
+  }, [crop]);
+  const saveCropped = () => {};
   return (
     <>
       <div
@@ -120,7 +132,7 @@ const Home = () => {
               style={{ border: "1px solid black" }}
             />
           </div>
-          <div>
+          <div id="hideOriginal">
             <canvas
               id="canvas"
               ref={canvasRef}
@@ -129,6 +141,9 @@ const Home = () => {
               style={{ border: "1px solid black" }}
             />
           </div>
+          {!crop && image ? null : (
+            <Crop image={image} canvas={canvas} setCrop={setCrop} />
+          )}
         </CanvasWrapper>
       </div>
       <ContentWrapper style={{ flexDirection: "row" }}>
@@ -156,6 +171,11 @@ const Home = () => {
         >
           Download Image
         </DownloadButton>
+        {imgsrc ? (
+          !crop ? (
+            <Button onClick={() => handleCrop()}>Crop</Button>
+          ) : null
+        ) : null}
       </ContentWrapper>
       <ContentWrapper>
         <Fundamentals
