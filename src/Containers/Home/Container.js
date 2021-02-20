@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import Fundamentals from "../Containers/Fundamentals";
-import Advanced from "../Containers/Advanced";
-import Crop from "../Containers/Crop";
-import { CanvasWrapper, ContentWrapper,ButtonWrapper } from "../Containers/AppWrapper";
-import { Button, DownloadButton } from "../components/Button";
-import { HeaderTitle } from "../components/Header";
-import Custom from "../Containers/Custom";
+import Fundamentals from "../Fundamentals";
+import Advanced from "../Advanced";
+import Crop from "../Crop";
+import { CanvasWrapper, ContentWrapper,ButtonWrapper } from "../Wrappers";
+import { Button, DownloadButton } from "../../components/Button";
+import { HeaderTitle } from "../../components/Header";
+import Custom from "../Custom";
 const Home = () => {
   const [imgsrc, setImgsrc] = useState(null);
   const canvasRef = useRef(null);

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ThemeProvider } from "styled-components";
 import darkTheme from "./themes/darkMode";
 import lightTheme from "./themes/lightMode";
-import Home from "./app/Container";
-import { AppWrapper } from "./Containers/AppWrapper";
+import Home from "./Containers/Home/Container";
+import { AppWrapper } from "./Containers/Wrappers";
 import "./App.css";
 import {
   Footer,

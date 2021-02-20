@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../../components/Button";
-import { Content } from "../AppWrapper";
+import { Content } from "../Wrappers";
 const Custom = (props) => {
   const { image } = props;
 

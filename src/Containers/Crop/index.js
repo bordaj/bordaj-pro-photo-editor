@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Cropper from "react-cropper";
 import "cropperjs/dist/cropper.css";
 import { Button, DownloadButton } from "../../components/Button";
-import { ContentWrapper } from "../AppWrapper";
+import { ContentWrapper } from "../Wrappers";
 
 const Crop = (props) => {
   const { ctx, setContext, image, setCrop } = props;

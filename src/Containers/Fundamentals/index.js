@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as codes from "../../helpers/codes";
-import { Content } from "../AppWrapper";
+import { Content } from "../Wrappers";
 import { SliderWrapper } from "./styles";
 const Fundamentals = (props) => {
   const { image, reset, setReset } = props;
