@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/bordaj-pro-photo-editor/static/css/main.4051b0da.chunk.css",
-    "main.js": "/bordaj-pro-photo-editor/static/js/main.a6b5ae37.chunk.js",
-    "main.js.map": "/bordaj-pro-photo-editor/static/js/main.a6b5ae37.chunk.js.map",
+    "main.js": "/bordaj-pro-photo-editor/static/js/main.b3e9beb6.chunk.js",
+    "main.js.map": "/bordaj-pro-photo-editor/static/js/main.b3e9beb6.chunk.js.map",
     "runtime-main.js": "/bordaj-pro-photo-editor/static/js/runtime-main.ae1e359b.js",
     "runtime-main.js.map": "/bordaj-pro-photo-editor/static/js/runtime-main.ae1e359b.js.map",
     "static/css/2.fe2a3aa7.chunk.css": "/bordaj-pro-photo-editor/static/css/2.fe2a3aa7.chunk.css",
-    "static/js/2.df34f87b.chunk.js": "/bordaj-pro-photo-editor/static/js/2.df34f87b.chunk.js",
-    "static/js/2.df34f87b.chunk.js.map": "/bordaj-pro-photo-editor/static/js/2.df34f87b.chunk.js.map",
+    "static/js/2.41fd0257.chunk.js": "/bordaj-pro-photo-editor/static/js/2.41fd0257.chunk.js",
+    "static/js/2.41fd0257.chunk.js.map": "/bordaj-pro-photo-editor/static/js/2.41fd0257.chunk.js.map",
     "static/js/3.a92902df.chunk.js": "/bordaj-pro-photo-editor/static/js/3.a92902df.chunk.js",
     "static/js/3.a92902df.chunk.js.map": "/bordaj-pro-photo-editor/static/js/3.a92902df.chunk.js.map",
     "index.html": "/bordaj-pro-photo-editor/index.html",
     "static/css/2.fe2a3aa7.chunk.css.map": "/bordaj-pro-photo-editor/static/css/2.fe2a3aa7.chunk.css.map",
     "static/css/main.4051b0da.chunk.css.map": "/bordaj-pro-photo-editor/static/css/main.4051b0da.chunk.css.map",
-    "static/js/2.df34f87b.chunk.js.LICENSE.txt": "/bordaj-pro-photo-editor/static/js/2.df34f87b.chunk.js.LICENSE.txt"
+    "static/js/2.41fd0257.chunk.js.LICENSE.txt": "/bordaj-pro-photo-editor/static/js/2.41fd0257.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.ae1e359b.js",
     "static/css/2.fe2a3aa7.chunk.css",
-    "static/js/2.df34f87b.chunk.js",
+    "static/js/2.41fd0257.chunk.js",
     "static/css/main.4051b0da.chunk.css",
-    "static/js/main.a6b5ae37.chunk.js"
+    "static/js/main.b3e9beb6.chunk.js"
   ]
 }
