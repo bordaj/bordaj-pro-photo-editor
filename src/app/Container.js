@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Fundamentals from "../Containers/Fundamentals";
 import Advanced from "../Containers/Advanced";
 import Crop from "../Containers/Crop";
-import { CanvasWrapper, ContentWrapper } from "../Containers/AppWrapper";
+import { CanvasWrapper, ContentWrapper,ButtonWrapper } from "../Containers/AppWrapper";
 import { Button, DownloadButton } from "../components/Button";
 import { HeaderTitle } from "../components/Header";
 import Custom from "../Containers/Custom";
@@ -109,8 +109,16 @@ const Home = () => {
   }, [imgsrc]);
   let active = 0;
   const handleSave = (e) => {
-    const png = canvas.toDataURL();
-    e.target.href = png;
+    window.Caman("#canvas", function () {
+      //console.log(this.toBase64());
+      let a = document.createElement("a");
+      a.href = this.toBase64();
+      a.download = "edited.jpg";
+      a.click();
+    });
+
+    // const png = canvas.toDataURL("image/png", 1);
+    // e.target.href = png;
   };
   const handleCrop = () => {
     setCrop(!crop);
@@ -137,7 +145,7 @@ const Home = () => {
           )}
         </CanvasWrapper>
       </div>
-      <ContentWrapper style={{ flexDirection: "row" }}>
+      <ButtonWrapper>
         {!crop ? (
           <>
             <input
@@ -162,18 +170,14 @@ const Home = () => {
               >
                 Show Original
               </Button>
-              <DownloadButton
-                onClick={(e) => handleSave(e)}
-                download="edited"
-                href="#1"
-              >
+              <DownloadButton onClick={(e) => handleSave(e)}>
                 Download Image
               </DownloadButton>
               <Button onClick={() => handleCrop()}>Crop</Button>
             </>
           ) : null
         ) : null}
-      </ContentWrapper>
+      </ButtonWrapper>
       {imgsrc ? (
         <ContentWrapper>
           <HeaderTitle style={{ paddingTop: 16 }}>

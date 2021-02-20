@@ -45,6 +45,15 @@ export const ContentWrapper = styled.div`
     border: ${(props) => props.theme.colors.buttonBorder};
   }
 `;
+export const ButtonWrapper = styled(ContentWrapper)`
+  flex-direction: row;
+  @media (hover: none) and (pointer: coarse) {
+    flex-direction: column;
+    width: max-content;
+    margin: auto;
+  }
+`;
+
 export const Content = styled(ContentWrapper)`
   flex-direction: row;
   margin: 0;
