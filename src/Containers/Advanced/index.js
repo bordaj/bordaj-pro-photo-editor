@@ -15,7 +15,7 @@ const Advanced = (props) => {
     { clarity: "clarity" },
     { "orange-peel": "orangePeel" },
     { "sin-city": "sinCity" },
-    { "sun-rise": "sunRise" },
+    { "sunrise": "sunrise" },
     { "cross-process": "crossProcess" },
     { love: "love" },
     { grungy: "grungy" },
@@ -24,19 +24,11 @@ const Advanced = (props) => {
     { "old-boot": "oldBoot" },
     { "glowing-sun": "glowingSun" },
     { "hazy-days": "hazyDays" },
-  ];
-  const customFilterList = [
-    {
-      oldPaper: "oldPaper",
-      button: () => {
-        return window.Caman("#canvas", image, function () {
-          this.pinhole();
-          this.noise(10);
-          this.orangePeel();
-          this.render();
-        });
-      },
-    },
+    { pinhole: "pinhole" },
+    { "her-majesty": "herMajesty" },
+    { nostalgia: "nostalgia" },
+    { hemingway: "hemingway" },
+    { concentrate: "concentrate" },
   ];
   const applyAdvanced = (element) => {
     return window.Caman("#canvas", image, function () {

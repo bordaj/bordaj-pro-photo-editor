@@ -9,6 +9,11 @@ const Fundamentals = (props) => {
   const [hue, setHue] = useState(0);
   const [vibrance, setVibrance] = useState(0);
   const [sepia, setSepia] = useState(0);
+  const [sharpen, setSharpen] = useState(0);
+  const [noise, setNoise] = useState(0);
+  const [saturation, setSaturation] = useState(0);
+  const [exposure, setExposure] = useState(0);
+  const [stackBlur, setStackBlur] = useState(0);
 
   const stateHelper = (code, val) => {
     if (code === codes.BRIGHTNESS) {
@@ -21,6 +26,17 @@ const Fundamentals = (props) => {
       setSepia(val);
     } else if (code === codes.HUE) {
       setHue(val);
+    } else if (code === codes.SHARPEN) {
+      setSharpen(val);
+    } else if (code === codes.NOISE) {
+      setNoise(val);
+    } else if (code === codes.SATURATION) {
+      setSaturation(val);
+    } else if (code === codes.EXPOSURE) {
+      setExposure(val);
+    }
+    else if (code === codes.STACKBLUR) {
+      setStackBlur(val);
     }
   };
 
@@ -35,6 +51,11 @@ const Fundamentals = (props) => {
         .contrast(code == codes.CONTRAST ? value : contrast)
         .vibrance(code == codes.VIBRANCE ? value : vibrance)
         .sepia(code == codes.SEPIA ? value : sepia)
+        .sharpen(code == codes.SHARPEN ? value : sharpen)
+        .noise(code == codes.NOISE ? value : noise)
+        .saturation(code == codes.SATURATION ? value : saturation)
+        .exposure(code == codes.EXPOSURE ? value : exposure)
+        .stackBlur(code == codes.STACKBLUR ? value : stackBlur)
         .render();
     });
   };
@@ -49,6 +70,11 @@ const Fundamentals = (props) => {
         setVibrance(0);
         setSepia(0);
         setHue(0);
+        setSharpen(0);
+        setNoise(0);
+        setSaturation(0);
+        setExposure(0);
+        setStackBlur(0);
         setReset(!reset);
       });
     }
@@ -135,6 +161,86 @@ const Fundamentals = (props) => {
           min="-100"
           max="100"
           value={sepia}
+        />
+      </SliderWrapper>
+      <SliderWrapper>
+        <label for="sharpen">
+          <div onAuxClick={(e) => applyFundamentals(codes.SHARPEN, e, true)}>
+            sharpen <span>{sharpen}</span>
+          </div>
+        </label>
+        <input
+          onChange={(e) => applyFundamentals(codes.SHARPEN, e)}
+          id="sharpen"
+          name="sharpen"
+          type="range"
+          min="0"
+          max="100"
+          value={sharpen}
+        />
+      </SliderWrapper>
+      <SliderWrapper>
+        <label for="noise">
+          <div onAuxClick={(e) => applyFundamentals(codes.NOISE, e, true)}>
+            noise <span>{noise}</span>
+          </div>
+        </label>
+        <input
+          onChange={(e) => applyFundamentals(codes.NOISE, e)}
+          id="noise"
+          name="noise"
+          type="range"
+          min="0"
+          max="100"
+          value={noise}
+        />
+      </SliderWrapper>
+      <SliderWrapper>
+        <label for="saturation">
+          <div onAuxClick={(e) => applyFundamentals(codes.SATURATION, e, true)}>
+            saturation <span>{saturation}</span>
+          </div>
+        </label>
+        <input
+          onChange={(e) => applyFundamentals(codes.SATURATION, e)}
+          id="saturation"
+          name="saturation"
+          type="range"
+          min="-100"
+          max="100"
+          value={saturation}
+        />
+      </SliderWrapper>
+      <SliderWrapper>
+        <label for="exposure">
+          <div onAuxClick={(e) => applyFundamentals(codes.EXPOSURE, e, true)}>
+            exposure <span>{exposure}</span>
+          </div>
+        </label>
+        <input
+          onChange={(e) => applyFundamentals(codes.EXPOSURE, e)}
+          id="exposure"
+          name="exposure"
+          type="range"
+          min="-100"
+          max="100"
+          value={exposure}
+        />
+      </SliderWrapper>
+      <SliderWrapper>
+        <label for="stackBlur">
+          <div onAuxClick={(e) => applyFundamentals(codes.STACKBLUR, e, true)}>
+            Stack Blur <span>{stackBlur}</span>
+          </div>
+        </label>
+        <input
+          onChange={(e) => applyFundamentals(codes.STACKBLUR, e)}
+          id="stackBlur"
+          name="stackBlur"
+          type="range"
+          min="0"
+          max="20"
+          value={stackBlur}
         />
       </SliderWrapper>
     </Content>
