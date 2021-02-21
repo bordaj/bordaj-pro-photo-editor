@@ -14,30 +14,26 @@ const Fundamentals = (props) => {
   const [saturation, setSaturation] = useState(0);
   const [exposure, setExposure] = useState(0);
   const [stackBlur, setStackBlur] = useState(0);
-
+  const staticList = [
+    "brightness",
+    "contrast",
+    "vibrance",
+    "sepia",
+    "hue",
+    "sharpen",
+    "noise",
+    "saturation",
+    "exposure",
+    "stackBlur",
+  ];
   const stateHelper = (code, val) => {
-    if (code === codes.BRIGHTNESS) {
-      setBrightness(val);
-    } else if (code === codes.CONTRAST) {
-      setContrast(val);
-    } else if (code === codes.VIBRANCE) {
-      setVibrance(val);
-    } else if (code === codes.SEPIA) {
-      setSepia(val);
-    } else if (code === codes.HUE) {
-      setHue(val);
-    } else if (code === codes.SHARPEN) {
-      setSharpen(val);
-    } else if (code === codes.NOISE) {
-      setNoise(val);
-    } else if (code === codes.SATURATION) {
-      setSaturation(val);
-    } else if (code === codes.EXPOSURE) {
-      setExposure(val);
-    }
-    else if (code === codes.STACKBLUR) {
-      setStackBlur(val);
-    }
+    const setter = "set" + code.charAt(0).toUpperCase() + code.slice(1);
+    eval(setter)(val);
+  };
+
+  const stateChecker = (e) => {
+    const stateValue = eval(e);
+    return stateValue == 0 || stateValue == undefined ? false : true;
   };
 
   const applyFundamentals = (code, e, reset) => {
@@ -46,17 +42,15 @@ const Fundamentals = (props) => {
     stateHelper(code, value);
     return window.Caman("#canvas", image, function () {
       this.revert();
-      this.brightness(code == codes.BRIGHTNESS ? value : brightness)
-        .hue(code == codes.HUE ? value : hue)
-        .contrast(code == codes.CONTRAST ? value : contrast)
-        .vibrance(code == codes.VIBRANCE ? value : vibrance)
-        .sepia(code == codes.SEPIA ? value : sepia)
-        .sharpen(code == codes.SHARPEN ? value : sharpen)
-        .noise(code == codes.NOISE ? value : noise)
-        .saturation(code == codes.SATURATION ? value : saturation)
-        .exposure(code == codes.EXPOSURE ? value : exposure)
-        .stackBlur(code == codes.STACKBLUR ? value : stackBlur)
-        .render();
+      staticList.forEach((e, i) => {
+        const runEnhancement =
+          code == e
+            ? this[code](value)
+            : stateChecker(e)
+            ? this[e](eval(e))
+            : null;
+      });
+      this.render();
     });
   };
   useEffect(() => {
